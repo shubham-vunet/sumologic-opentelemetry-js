@@ -22,6 +22,10 @@ export interface DecideApiRequest {
   sessionId: string;
 }
 
+export interface SessionIdGetter {
+  (): string;
+}
+
 export interface ApiResponseData {
   percent: number;
   /**

@@ -2,14 +2,17 @@ import { pack, record } from 'rrweb';
 import { getRequestData, getRrwebDataPercentage } from './decideApi';
 import { processEvent } from './rrweb';
 import { eventWithTime } from '@rrweb/types';
-export function decideAndRecord(sessionId: string): void {
+import { SessionIdGetter } from './types';
+
+export function decideAndRecord(sessionIdGetter: SessionIdGetter): void {
+  const sessionId = sessionIdGetter();
   getRrwebDataPercentage(getRequestData(sessionId))
     .then((responseData) => {
       console.log('RRWEB data percentage is', responseData.percent);
       record({
         emit(event) {
           if (shouldFilterEvent(event, responseData.percent)) {
-            processEvent(event);
+            processEvent(sessionIdGetter, event);
           }
         },
         recordCanvas: true,

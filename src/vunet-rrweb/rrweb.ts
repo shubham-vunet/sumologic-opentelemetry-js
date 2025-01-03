@@ -1,6 +1,6 @@
 import { eventWithTime } from '@rrweb/types';
-import { getCurrentSessionId, RRWEB_ENDPOINT } from './common';
-import { BatchingOptions, BatchPayload } from './types';
+import { RRWEB_ENDPOINT } from './common';
+import { BatchingOptions, BatchPayload, SessionIdGetter } from './types';
 
 const eventQueue: eventWithTime[] = [];
 const BATCH_SIZE = 500;
@@ -17,6 +17,7 @@ let debounceTimeout: NodeJS.Timeout | null = null;
 /// If events generated are less frequent then we can send data less frequently
 /// Events once collected can be sent using the sendPayload function
 export const processEvent = (
+  sidGetter: SessionIdGetter,
   event?: eventWithTime,
   options?: BatchingOptions,
 ): void => {
@@ -28,8 +29,9 @@ export const processEvent = (
   }
 
   const eventsToSend = eventQueue.splice(0, BATCH_SIZE);
+  const sessionId = sidGetter();
   const payload: BatchPayload = {
-    sessionId: getCurrentSessionId(),
+    sessionId,
     events: eventsToSend,
   };
   sendPayload(payload);
@@ -61,11 +63,13 @@ const sendPayload = (payload: BatchPayload) => {
     });
 };
 
+const dummySidGetter = () => '';
+
 const debounceSendEvents = () => {
   if (debounceTimeout) {
     clearTimeout(debounceTimeout);
   }
   debounceTimeout = setTimeout(() => {
-    processEvent();
+    processEvent(dummySidGetter, undefined, { forceSend: true });
   }, DEBOUNCE_TIME_MS);
 };
