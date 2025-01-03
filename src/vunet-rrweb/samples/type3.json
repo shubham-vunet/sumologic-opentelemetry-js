@@ -1,0 +1,19 @@
+{
+  "type": 3,
+  "data": {
+    "source": 1,
+    "positions": [
+      { "x": 763, "y": 282, "id": 3, "timeOffset": -454 },
+      { "x": 776, "y": 272, "id": 3, "timeOffset": -403 },
+      { "x": 802, "y": 254, "id": 3, "timeOffset": -353 },
+      { "x": 838, "y": 229, "id": 3, "timeOffset": -303 },
+      { "x": 888, "y": 204, "id": 3, "timeOffset": -253 },
+      { "x": 929, "y": 195, "id": 3, "timeOffset": -203 },
+      { "x": 958, "y": 193, "id": 3, "timeOffset": -152 },
+      { "x": 981, "y": 196, "id": 3, "timeOffset": -102 },
+      { "x": 1000, "y": 206, "id": 3, "timeOffset": -52 },
+      { "x": 1022, "y": 224, "id": 3, "timeOffset": 0 }
+    ]
+  },
+  "timestamp": 1735188583921
+}

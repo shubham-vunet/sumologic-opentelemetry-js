@@ -40,6 +40,8 @@ import { version } from '../package.json';
 import { getCurrentSessionId } from './sumologic-span-processor/session-id';
 import { Attributes } from '@opentelemetry/api';
 import { CompositePropagator, W3CBaggagePropagator } from '@opentelemetry/core';
+import { record } from 'rrweb';
+import { decideAndRecord, processEvents } from './vunet-rrweb';
 
 type ReadyListener = () => void;
 
@@ -289,6 +291,8 @@ export const initialize = ({
   if (useWindow) {
     Object.assign(window.sumoLogicOpenTelemetryRum, result);
   }
+
+  decideAndRecord(getCurrentSessionId());
 
   return result;
 };

@@ -1,0 +1,71 @@
+import { eventWithTime } from '@rrweb/types';
+import { getCurrentSessionId, RRWEB_ENDPOINT } from './common';
+import { BatchingOptions, BatchPayload } from './types';
+
+const eventQueue: eventWithTime[] = [];
+const BATCH_SIZE = 500;
+const MIN_BATCH_SIZE = 10;
+const DEBOUNCE_TIME_MS = 2000;
+
+let debounceTimeout: NodeJS.Timeout | null = null;
+
+/// Write a logic to batch events and send them to the server
+/// This will add events to the events array and when conditions meet then It'll send them to the server
+/// If the internet connection is fast then send events frequently and bigger batch size
+/// If the internet connection is slow then send events less frequently and smaller batch size
+/// If events generated are more frequent then we need to send data frequently
+/// If events generated are less frequent then we can send data less frequently
+/// Events once collected can be sent using the sendPayload function
+export const processEvent = (
+  event?: eventWithTime,
+  options?: BatchingOptions,
+): void => {
+  event && eventQueue.push(event);
+
+  if (eventQueue.length < MIN_BATCH_SIZE && !options?.forceSend) {
+    debounceSendEvents();
+    return;
+  }
+
+  const eventsToSend = eventQueue.splice(0, BATCH_SIZE);
+  const payload: BatchPayload = {
+    sessionId: getCurrentSessionId(),
+    events: eventsToSend,
+  };
+  sendPayload(payload);
+};
+
+const sendPayload = (payload: BatchPayload) => {
+  console.log(payload);
+  console.log(JSON.stringify(payload));
+  fetch(RRWEB_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log('Successfully sent events:', data);
+    })
+    .catch((error) => {
+      console.error('Error sending events:', error);
+      // Re-add the events to the queue if sending fails
+      eventQueue.unshift(...payload.events);
+    });
+};
+
+const debounceSendEvents = () => {
+  if (debounceTimeout) {
+    clearTimeout(debounceTimeout);
+  }
+  debounceTimeout = setTimeout(() => {
+    processEvent();
+  }, DEBOUNCE_TIME_MS);
+};

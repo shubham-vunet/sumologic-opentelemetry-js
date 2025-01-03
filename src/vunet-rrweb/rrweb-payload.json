@@ -1,0 +1,569 @@
+{
+  "client": "",
+  "app": "",
+  "sessionId": "",
+  "time": 1735464297000,
+  "events": [
+    {
+      "type": 4,
+      "data": { "href": "http://localhost:3000/", "width": 960, "height": 938 },
+      "timestamp": 1735464297575
+    },
+    {
+      "type": 2,
+      "data": {
+        "node": {
+          "type": 0,
+          "childNodes": [
+            {
+              "type": 1,
+              "name": "html",
+              "publicId": "",
+              "systemId": "",
+              "id": 2
+            },
+            {
+              "type": 2,
+              "tagName": "html",
+              "attributes": { "lang": "en" },
+              "childNodes": [
+                {
+                  "type": 2,
+                  "tagName": "head",
+                  "attributes": {},
+                  "childNodes": [
+                    { "type": 3, "textContent": "\n  ", "id": 5 },
+                    {
+                      "type": 2,
+                      "tagName": "meta",
+                      "attributes": { "charset": "utf-8" },
+                      "childNodes": [],
+                      "id": 6
+                    },
+                    { "type": 3, "textContent": "\n  ", "id": 7 },
+                    {
+                      "type": 2,
+                      "tagName": "meta",
+                      "attributes": {
+                        "name": "viewport",
+                        "content": "width=device-width, initial-scale=1"
+                      },
+                      "childNodes": [],
+                      "id": 8
+                    },
+                    { "type": 3, "textContent": "\n  ", "id": 9 },
+                    {
+                      "type": 2,
+                      "tagName": "meta",
+                      "attributes": {
+                        "name": "theme-color",
+                        "content": "#000000"
+                      },
+                      "childNodes": [],
+                      "id": 10
+                    },
+                    { "type": 3, "textContent": "\n  ", "id": 11 },
+                    {
+                      "type": 2,
+                      "tagName": "meta",
+                      "attributes": {
+                        "name": "description",
+                        "content": "vuBank - Secure your dreams with us!"
+                      },
+                      "childNodes": [],
+                      "id": 12
+                    },
+                    { "type": 3, "textContent": "\n  ", "id": 13 },
+                    {
+                      "type": 2,
+                      "tagName": "title",
+                      "attributes": {},
+                      "childNodes": [
+                        { "type": 3, "textContent": "vuBank", "id": 15 }
+                      ],
+                      "id": 14
+                    },
+                    { "type": 3, "textContent": "\n  ", "id": 16 },
+                    {
+                      "type": 2,
+                      "tagName": "script",
+                      "attributes": {
+                        "async": "",
+                        "src": "http://localhost:3000/browser.js"
+                      },
+                      "childNodes": [],
+                      "id": 17
+                    },
+                    {
+                      "type": 2,
+                      "tagName": "script",
+                      "attributes": {},
+                      "childNodes": [
+                        {
+                          "type": 3,
+                          "textContent": "SCRIPT_PLACEHOLDER",
+                          "id": 19
+                        }
+                      ],
+                      "id": 18
+                    },
+                    { "type": 3, "textContent": "\n  ", "id": 20 },
+                    {
+                      "type": 2,
+                      "tagName": "script",
+                      "attributes": {},
+                      "childNodes": [
+                        {
+                          "type": 3,
+                          "textContent": "SCRIPT_PLACEHOLDER",
+                          "id": 22
+                        }
+                      ],
+                      "id": 21
+                    },
+                    { "type": 3, "textContent": "\n", "id": 23 }
+                  ],
+                  "id": 4
+                },
+                { "type": 3, "textContent": "\n\n", "id": 24 },
+                {
+                  "type": 2,
+                  "tagName": "body",
+                  "attributes": {},
+                  "childNodes": [
+                    { "type": 3, "textContent": "\n  ", "id": 26 },
+                    {
+                      "type": 2,
+                      "tagName": "h1",
+                      "attributes": {},
+                      "childNodes": [
+                        { "type": 3, "textContent": "Hello", "id": 28 }
+                      ],
+                      "id": 27
+                    },
+                    { "type": 3, "textContent": "\n  ", "id": 29 },
+                    {
+                      "type": 2,
+                      "tagName": "p",
+                      "attributes": {},
+                      "childNodes": [
+                        {
+                          "type": 3,
+                          "textContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni, aut sunt! Nulla, ab suscipit minus optio eos, qui, animi totam doloribus ut nostrum accusantium aliquid porro natus at iusto sapiente?",
+                          "id": 31
+                        }
+                      ],
+                      "id": 30
+                    },
+                    { "type": 3, "textContent": "\n  ", "id": 32 },
+                    {
+                      "type": 2,
+                      "tagName": "button",
+                      "attributes": { "id": "BTN", "onclick": "callSome()" },
+                      "childNodes": [
+                        { "type": 3, "textContent": "Click", "id": 34 }
+                      ],
+                      "id": 33
+                    },
+                    { "type": 3, "textContent": "\n\n\n", "id": 35 }
+                  ],
+                  "id": 25
+                }
+              ],
+              "id": 3
+            }
+          ],
+          "id": 1
+        },
+        "initialOffset": { "left": 0, "top": 0 }
+      },
+      "timestamp": 1735464297576
+    },
+    {
+      "type": 3,
+      "data": {
+        "source": 1,
+        "positions": [{ "x": 310, "y": 937, "id": 3, "timeOffset": 0 }]
+      },
+      "timestamp": 1735464297856
+    },
+    {
+      "type": 3,
+      "data": {
+        "source": 1,
+        "positions": [
+          { "x": 414, "y": 846, "id": 3, "timeOffset": -441 },
+          { "x": 414, "y": 845, "id": 3, "timeOffset": -316 },
+          { "x": 310, "y": 816, "id": 3, "timeOffset": -257 },
+          { "x": 194, "y": 739, "id": 3, "timeOffset": -206 },
+          { "x": 110, "y": 637, "id": 3, "timeOffset": -156 },
+          { "x": 72, "y": 449, "id": 3, "timeOffset": -90 },
+          { "x": 115, "y": 288, "id": 3, "timeOffset": -40 }
+        ]
+      },
+      "timestamp": 1735464298357
+    },
+    {
+      "type": 3,
+      "data": {
+        "source": 1,
+        "positions": [
+          { "x": 151, "y": 147, "id": 25, "timeOffset": -475 },
+          { "x": 148, "y": 108, "id": 30, "timeOffset": -426 },
+          { "x": 145, "y": 105, "id": 30, "timeOffset": -376 },
+          { "x": 134, "y": 106, "id": 30, "timeOffset": -326 },
+          { "x": 103, "y": 117, "id": 25, "timeOffset": -275 },
+          { "x": 88, "y": 130, "id": 25, "timeOffset": -224 },
+          { "x": 82, "y": 139, "id": 25, "timeOffset": -159 },
+          { "x": 81, "y": 140, "id": 25, "timeOffset": -51 }
+        ]
+      },
+      "timestamp": 1735464298859
+    },
+    {
+      "type": 3,
+      "data": {
+        "source": 1,
+        "positions": [
+          { "x": 82, "y": 140, "id": 25, "timeOffset": -349 },
+          { "x": 91, "y": 139, "id": 25, "timeOffset": -296 }
+        ]
+      },
+      "timestamp": 1735464299362
+    },
+    {
+      "type": 3,
+      "data": { "source": 4, "width": 150, "height": 938 },
+      "timestamp": 1735464299583
+    },
+    {
+      "type": 3,
+      "data": {
+        "source": 1,
+        "positions": [
+          { "x": 95, "y": 138, "id": 25, "timeOffset": -462 },
+          { "x": 94, "y": 137, "id": 25, "timeOffset": -299 },
+          { "x": 100, "y": 137, "id": 30, "timeOffset": -204 }
+        ]
+      },
+      "timestamp": 1735464299870
+    },
+    {
+      "type": 3,
+      "data": { "source": 4, "width": 1708, "height": 1304 },
+      "timestamp": 1735464301101
+    },
+    {
+      "type": 3,
+      "data": {
+        "source": 1,
+        "positions": [{ "x": 1705, "y": 95, "id": 3, "timeOffset": 0 }]
+      },
+      "timestamp": 1735464301261
+    },
+    {
+      "type": 3,
+      "data": { "source": 4, "width": 1708, "height": 1305 },
+      "timestamp": 1735464301305
+    },
+    {
+      "type": 3,
+      "data": {
+        "source": 1,
+        "positions": [
+          { "x": 1494, "y": 229, "id": 3, "timeOffset": -460 },
+          { "x": 1365, "y": 277, "id": 3, "timeOffset": -410 },
+          { "x": 1326, "y": 290, "id": 3, "timeOffset": -360 },
+          { "x": 1274, "y": 297, "id": 3, "timeOffset": -310 },
+          { "x": 1173, "y": 307, "id": 3, "timeOffset": -260 },
+          { "x": 1032, "y": 333, "id": 3, "timeOffset": -210 },
+          { "x": 927, "y": 347, "id": 3, "timeOffset": -160 },
+          { "x": 907, "y": 343, "id": 3, "timeOffset": -108 }
+        ]
+      },
+      "timestamp": 1735464301772
+    },
+    {
+      "type": 3,
+      "data": {
+        "source": 1,
+        "positions": [
+          { "x": 946, "y": 351, "id": 3, "timeOffset": -432 },
+          { "x": 980, "y": 373, "id": 3, "timeOffset": -382 },
+          { "x": 1086, "y": 410, "id": 3, "timeOffset": -332 },
+          { "x": 1261, "y": 440, "id": 3, "timeOffset": -282 },
+          { "x": 1456, "y": 449, "id": 3, "timeOffset": -232 },
+          { "x": 1633, "y": 434, "id": 3, "timeOffset": -182 }
+        ]
+      },
+      "timestamp": 1735464302277
+    },
+    {
+      "type": 3,
+      "data": {
+        "source": 1,
+        "positions": [{ "x": 1105, "y": 343, "id": 3, "timeOffset": 0 }]
+      },
+      "timestamp": 1735464509133
+    },
+    {
+      "type": 3,
+      "data": {
+        "source": 1,
+        "positions": [{ "x": 1106, "y": 343, "id": 3, "timeOffset": 0 }]
+      },
+      "timestamp": 1735464509721
+    },
+    {
+      "type": 3,
+      "data": {
+        "source": 1,
+        "positions": [
+          { "x": 1136, "y": 324, "id": 3, "timeOffset": -460 },
+          { "x": 1293, "y": 253, "id": 3, "timeOffset": -410 },
+          { "x": 1578, "y": 107, "id": 25, "timeOffset": -360 }
+        ]
+      },
+      "timestamp": 1735464510231
+    },
+    {
+      "type": 3,
+      "data": { "source": 4, "width": 960, "height": 938 },
+      "timestamp": 1735464510248
+    },
+    {
+      "type": 3,
+      "data": { "source": 4, "width": 1708, "height": 1305 },
+      "timestamp": 1735464511763
+    },
+    {
+      "type": 3,
+      "data": {
+        "source": 1,
+        "positions": [{ "x": 1305, "y": 1, "id": 3, "timeOffset": 0 }]
+      },
+      "timestamp": 1735464512022
+    },
+    {
+      "type": 3,
+      "data": {
+        "source": 1,
+        "positions": [
+          { "x": 1324, "y": 42, "id": 27, "timeOffset": -451 },
+          { "x": 1336, "y": 70, "id": 25, "timeOffset": -401 },
+          { "x": 1358, "y": 113, "id": 25, "timeOffset": -350 },
+          { "x": 1390, "y": 168, "id": 3, "timeOffset": -300 },
+          { "x": 1423, "y": 220, "id": 3, "timeOffset": -250 },
+          { "x": 1457, "y": 262, "id": 3, "timeOffset": -199 },
+          { "x": 1477, "y": 282, "id": 3, "timeOffset": -140 },
+          { "x": 1487, "y": 290, "id": 3, "timeOffset": -90 },
+          { "x": 1547, "y": 337, "id": 3, "timeOffset": -36 }
+        ]
+      },
+      "timestamp": 1735464512523
+    },
+    {
+      "type": 3,
+      "data": {
+        "source": 1,
+        "positions": [{ "x": 1684, "y": 439, "id": 3, "timeOffset": -491 }]
+      },
+      "timestamp": 1735464513028
+    },
+    {
+      "type": 3,
+      "data": {
+        "source": 1,
+        "positions": [{ "x": 1702, "y": 1029, "id": 3, "timeOffset": 0 }]
+      },
+      "timestamp": 1735464515705
+    },
+    {
+      "type": 3,
+      "data": {
+        "source": 1,
+        "positions": [
+          { "x": 1369, "y": 945, "id": 3, "timeOffset": -451 },
+          { "x": 1072, "y": 864, "id": 3, "timeOffset": -401 },
+          { "x": 873, "y": 809, "id": 3, "timeOffset": -351 },
+          { "x": 832, "y": 791, "id": 3, "timeOffset": -300 },
+          { "x": 824, "y": 787, "id": 3, "timeOffset": -245 },
+          { "x": 824, "y": 784, "id": 3, "timeOffset": -191 },
+          { "x": 822, "y": 783, "id": 3, "timeOffset": -141 },
+          { "x": 817, "y": 772, "id": 3, "timeOffset": -89 },
+          { "x": 804, "y": 748, "id": 3, "timeOffset": -37 }
+        ]
+      },
+      "timestamp": 1735464516206
+    },
+    {
+      "type": 3,
+      "data": { "source": 2, "type": 1, "id": 3, "x": 766, "y": 697 },
+      "timestamp": 1735464516260
+    },
+    {
+      "type": 3,
+      "data": { "source": 2, "type": 0, "id": 3, "x": 766, "y": 695 },
+      "timestamp": 1735464516359
+    },
+    {
+      "type": 3,
+      "data": { "source": 2, "type": 3, "id": 3, "x": 766, "y": 695 },
+      "timestamp": 1735464516360
+    },
+    {
+      "type": 3,
+      "data": {
+        "source": 1,
+        "positions": [
+          { "x": 775, "y": 709, "id": 3, "timeOffset": -495 },
+          { "x": 766, "y": 696, "id": 3, "timeOffset": -438 }
+        ]
+      },
+      "timestamp": 1735464516714
+    },
+    {
+      "type": 3,
+      "data": { "source": 2, "type": 1, "id": 3, "x": 330, "y": 293 },
+      "timestamp": 1735464516798
+    },
+    {
+      "type": 3,
+      "data": { "source": 2, "type": 0, "id": 3, "x": 328, "y": 294 },
+      "timestamp": 1735464516913
+    },
+    {
+      "type": 3,
+      "data": { "source": 2, "type": 2, "id": 3, "x": 328, "y": 294 },
+      "timestamp": 1735464516914
+    },
+    {
+      "type": 3,
+      "data": {
+        "source": 1,
+        "positions": [
+          { "x": 330, "y": 295, "id": 3, "timeOffset": -417 },
+          { "x": 328, "y": 294, "id": 3, "timeOffset": -364 },
+          { "x": 328, "y": 294, "id": 3, "timeOffset": -287 },
+          { "x": 327, "y": 294, "id": 3, "timeOffset": -199 },
+          { "x": 304, "y": 271, "id": 3, "timeOffset": -149 },
+          { "x": 236, "y": 206, "id": 3, "timeOffset": -99 },
+          { "x": 175, "y": 147, "id": 3, "timeOffset": -49 }
+        ]
+      },
+      "timestamp": 1735464517216
+    },
+    {
+      "type": 3,
+      "data": { "source": 2, "type": 1, "id": 33, "x": 42, "y": 125 },
+      "timestamp": 1735464517634
+    },
+    {
+      "type": 3,
+      "data": { "source": 2, "type": 5, "id": 33 },
+      "timestamp": 1735464517635
+    },
+    {
+      "type": 3,
+      "data": {
+        "source": 1,
+        "positions": [
+          { "x": 144, "y": 122, "id": 25, "timeOffset": -500 },
+          { "x": 129, "y": 117, "id": 25, "timeOffset": -448 },
+          { "x": 104, "y": 116, "id": 25, "timeOffset": -398 },
+          { "x": 79, "y": 119, "id": 25, "timeOffset": -346 },
+          { "x": 67, "y": 121, "id": 25, "timeOffset": -295 },
+          { "x": 49, "y": 125, "id": 33, "timeOffset": -245 },
+          { "x": 42, "y": 124, "id": 33, "timeOffset": -60 }
+        ]
+      },
+      "timestamp": 1735464517717
+    },
+    {
+      "type": 3,
+      "data": { "source": 2, "type": 0, "id": 33, "x": 42, "y": 124 },
+      "timestamp": 1735464517729
+    },
+    {
+      "type": 3,
+      "data": { "source": 2, "type": 2, "id": 33, "x": 42, "y": 124 },
+      "timestamp": 1735464517730
+    },
+    {
+      "type": 3,
+      "data": {
+        "source": 0,
+        "texts": [],
+        "attributes": [],
+        "removes": [{ "parentId": 33, "id": 34 }],
+        "adds": [
+          {
+            "parentId": 33,
+            "nextId": null,
+            "node": {
+              "type": 3,
+              "textContent": "Clicked at 1735464517730",
+              "id": 36
+            }
+          }
+        ]
+      },
+      "timestamp": 1735464517730
+    },
+    {
+      "type": 3,
+      "data": { "source": 2, "type": 1, "id": 33, "x": 42, "y": 124 },
+      "timestamp": 1735464517816
+    },
+    {
+      "type": 3,
+      "data": { "source": 2, "type": 0, "id": 33, "x": 42, "y": 124 },
+      "timestamp": 1735464517946
+    },
+    {
+      "type": 3,
+      "data": { "source": 2, "type": 2, "id": 33, "x": 42, "y": 124 },
+      "timestamp": 1735464517947
+    },
+    {
+      "type": 3,
+      "data": {
+        "source": 0,
+        "texts": [],
+        "attributes": [],
+        "removes": [{ "parentId": 33, "id": 36 }],
+        "adds": [
+          {
+            "parentId": 33,
+            "nextId": null,
+            "node": {
+              "type": 3,
+              "textContent": "Clicked at 1735464517947",
+              "id": 37
+            }
+          }
+        ]
+      },
+      "timestamp": 1735464517947
+    },
+    {
+      "type": 3,
+      "data": { "source": 2, "type": 4, "id": 33, "x": 42, "y": 124 },
+      "timestamp": 1735464517947
+    },
+    {
+      "type": 3,
+      "data": {
+        "source": 1,
+        "positions": [
+          { "x": 42, "y": 124, "id": 33, "timeOffset": -488 },
+          { "x": 42, "y": 125, "id": 33, "timeOffset": -226 },
+          { "x": 109, "y": 168, "id": 3, "timeOffset": -176 },
+          { "x": 496, "y": 345, "id": 3, "timeOffset": -126 },
+          { "x": 1183, "y": 586, "id": 3, "timeOffset": -76 }
+        ]
+      },
+      "timestamp": 1735464518219
+    }
+  ]
+}
