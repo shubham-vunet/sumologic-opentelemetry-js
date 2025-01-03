@@ -24,7 +24,7 @@ export const processEvent = (
   event && eventQueue.push(event);
 
   if (eventQueue.length < MIN_BATCH_SIZE && !options?.forceSend) {
-    debounceSendEvents();
+    debounceSendEvents(sidGetter);
     return;
   }
 
@@ -63,13 +63,11 @@ const sendPayload = (payload: BatchPayload) => {
     });
 };
 
-const dummySidGetter = () => '';
-
-const debounceSendEvents = () => {
+const debounceSendEvents = (sidGetter: SessionIdGetter) => {
   if (debounceTimeout) {
     clearTimeout(debounceTimeout);
   }
   debounceTimeout = setTimeout(() => {
-    processEvent(dummySidGetter, undefined, { forceSend: true });
+    processEvent(sidGetter, undefined, { forceSend: true });
   }, DEBOUNCE_TIME_MS);
 };
