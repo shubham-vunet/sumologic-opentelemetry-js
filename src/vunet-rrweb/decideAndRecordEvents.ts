@@ -8,10 +8,10 @@ export function decideAndRecord(sessionIdGetter: SessionIdGetter): void {
   const sessionId = sessionIdGetter();
   getRrwebDataPercentage(getRequestData(sessionId))
     .then((responseData) => {
-      console.log('RRWEB data percentage is', responseData.percent);
+      console.log('RRWEB data percentage is', responseData.percentage);
       record({
         emit(event) {
-          if (shouldFilterEvent(event, responseData.percent)) {
+          if (shouldFilterEvent(event, responseData.percentage)) {
             processEvent(sessionIdGetter, event);
           }
         },
@@ -24,8 +24,8 @@ export function decideAndRecord(sessionIdGetter: SessionIdGetter): void {
     });
 }
 
-function shouldFilterEvent(event: eventWithTime, percent: number): boolean {
-  const threshold = 100 - percent;
+function shouldFilterEvent(event: eventWithTime, percentage: number): boolean {
+  const threshold = 100 - percentage;
   const random = Math.floor(Math.random() * 100);
   return random > threshold;
 }
