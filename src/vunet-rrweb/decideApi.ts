@@ -16,9 +16,13 @@ export async function getRrwebDataPercentage(
   requestData: DecideApiRequest,
 ): Promise<ApiResponseData> {
   try {
-    const response = await axios.post<ApiResponseData>(
+    // const response = await axios.post<ApiResponseData>(
+    //   `${RRWEB_ENDPOINT}-${pickOne(['partial', 'full', 'none'])}.json`,
+    //   requestData,
+    // );
+
+    const response = await axios.get<ApiResponseData>(
       `${RRWEB_ENDPOINT}-${pickOne(['partial', 'full', 'none'])}.json`,
-      requestData,
     );
     return response.data;
   } catch (error) {
