@@ -270,7 +270,7 @@ export const initialize = ({
       });
   };
 
-  const tracer = provider.getTracer('@sumologic/opentelemetry-rum');
+  const tracer = provider.getTracer('@sumologic/vunet-rum');
   registerInstrumentations();
 
   const result = {
