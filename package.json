@@ -1,5 +1,5 @@
 {
-  "name": "@sumologic/vunet-rum",
+  "name": "@vunet/otel-rum",
   "version": "4.6.1",
   "description": "Adds OpenTelemetry tracing auto-instrumentation in the browser. Collects spans on network events and sends them to Sumo Logic.",
   "main": "./dist/index.js",

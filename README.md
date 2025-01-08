@@ -97,12 +97,12 @@ version of it. If you want to manually control versioning of the script please u
 
 The other option is to bundle this library inside your project and initialize it.
 
-Inside your project directory execute `npm install @sumologic/vunet-rum`.
+Inside your project directory execute `npm install @vunet/otel-rum`.
 
 RUM needs to be initialized preferably before other functionalities in your code:
 
 ```javascript
-import { initialize } from '@sumologic/vunet-rum';
+import { initialize } from '@vunet/otel-rum';
 
 initialize({
   collectionSourceUrl: 'sumo_logic_traces_collector_source_url',

@@ -270,7 +270,7 @@ export const initialize = ({
       });
   };
 
-  const tracer = provider.getTracer('@sumologic/vunet-rum');
+  const tracer = provider.getTracer('@vunet/otel-rum');
   registerInstrumentations();
 
   const result = {

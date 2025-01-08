@@ -24,21 +24,21 @@ jobs:
       # TODO: don't change 'latest' dist-tag for beta versions;
       # currently when publishing version with a suffix,
       # the latest tag needs to be manually restored with
-      # 'npm dist-tag add @sumologic/vunet-rum@{version} latest'
+      # 'npm dist-tag add @vunet/otel-rum@{version} latest'
       - run: |
           npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
           npm publish --access public
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: npm i aws-sdk@^2.977.0
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
-          role-to-assume: ${{ secrets.RELEASE_ROLE_ARN }}
-          role-session-name: OIDCSession
-      - run: node scripts/publish-to-cdn.js
-        env:
-          RUM_CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.RUM_CLOUDFRONT_DISTRIBUTION_ID }}
-          RUM_S3_BUCKET: ${{ secrets.RUM_S3_BUCKET }}
-          SLACK_WEBHOOK_TRACING_RELEASES: ${{ secrets.SLACK_WEBHOOK_TRACING_RELEASES }}
+      # - run: npm i aws-sdk@^2.977.0
+      # - name: Configure AWS Credentials
+      #   uses: aws-actions/configure-aws-credentials@v1
+      #   with:
+      #     aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+      #     role-to-assume: ${{ secrets.RELEASE_ROLE_ARN }}
+      #     role-session-name: OIDCSession
+      # - run: node scripts/publish-to-cdn.js
+      #   env:
+      #     RUM_CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.RUM_CLOUDFRONT_DISTRIBUTION_ID }}
+      #     RUM_S3_BUCKET: ${{ secrets.RUM_S3_BUCKET }}
+      #     SLACK_WEBHOOK_TRACING_RELEASES: ${{ secrets.SLACK_WEBHOOK_TRACING_RELEASES }}

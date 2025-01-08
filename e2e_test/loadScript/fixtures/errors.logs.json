@@ -39,7 +39,7 @@
       "scopeLogs": [
         {
           "scope": {
-            "name": "@sumologic/vunet-rum",
+            "name": "@vunet/otel-rum",
             "version": "4.6.1"
           },
           "logRecords": [
