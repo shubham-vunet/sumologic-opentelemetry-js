@@ -9,7 +9,7 @@ interface Cookie {
 }
 
 const SESSION_ID_ATTRIBUTE = 'rum.session_id';
-const COOKIE_NAME = 'sumoLogicOpenTelemetryRumSessionId';
+const COOKIE_NAME = 'vunetRumSessionId';
 const COOKIE_VALUE_SEPARATOR = '-';
 const MAX_INACTIVITY_MS = 1000 * 60 * 5; // 5 minutes
 const REFRESH_ACTIVITY_TIME_AFTER_MS = 1000 * 30; // 30 seconds

@@ -28,8 +28,8 @@ your website:
   type="text/javascript"
 ></script>
 <script>
-  window.sumoLogicOpenTelemetryRum &&
-    window.sumoLogicOpenTelemetryRum.initialize({
+  window.vunetRum &&
+    window.vunetRum.initialize({
       collectionSourceUrl: 'sumo_logic_traces_collector_source_url',
       serviceName: 'name_of_your_web_service',
       propagateTraceHeaderCorsUrls: [
@@ -62,12 +62,12 @@ requests made before script run will be limited.
       (n = d.getElementsByTagName('script')[0]).parentNode.insertBefore(e, n);
   })(
     window,
-    'sumoLogicOpenTelemetryRum',
+    'vunetRum',
     document,
     'https://rum.sumologic.com/sumologic-rum.js',
   );
-  window.sumoLogicOpenTelemetryRum.onReady(function () {
-    window.sumoLogicOpenTelemetryRum.initialize({
+  window.vunetRum.onReady(function () {
+    window.vunetRum.initialize({
       collectionSourceUrl: 'sumo_logic_traces_collector_source_url',
       serviceName: 'name_of_your_web_service',
       propagateTraceHeaderCorsUrls: [
@@ -171,17 +171,17 @@ calling `setDefaultAttribute()`).
 OpenTelemetry uses Context Propagation to pass Baggage around, and each of the different library implementations has
 propagators that parse and make that Baggage available without you needing to explicitly implement it.
 
-Baggage can be used by accessing methods in our `window.sumoLogicOpenTelemetryRum` pulled from OpenTelemetry upstream:
+Baggage can be used by accessing methods in our `window.vunetRum` pulled from OpenTelemetry upstream:
 
 ```javascript
 const baggage =
-  window.sumoLogicOpenTelemetryRum.api.propagation.getBaggage(
-    window.sumoLogicOpenTelemetryRum.api.context.active(),
-  ) || window.sumoLogicOpenTelemetryRum.api.propagation.createBaggage();
+  window.vunetRum.api.propagation.getBaggage(
+    window.vunetRum.api.context.active(),
+  ) || window.vunetRum.api.propagation.createBaggage();
 
 baggage.setEntry('customerId', { value: 'customer-id-value' });
-window.sumoLogicOpenTelemetryRum.api.propagation.setBaggage(
-  window.sumoLogicOpenTelemetryRum.api.context.active(),
+window.vunetRum.api.propagation.setBaggage(
+  window.vunetRum.api.context.active(),
   baggage,
 );
 ```
@@ -193,8 +193,8 @@ Useful links:
 
 ## Manual instrumentation
 
-When initialized by the `<script />` tag, window attribute `sumoLogicOpenTelemetryRum` is exposed. It gives possibility
-to create spans manually. Global `sumoLogicOpenTelemetryRum` objects contains:
+When initialized by the `<script />` tag, window attribute `vunetRum` is exposed. It gives possibility
+to create spans manually. Global `vunetRum` objects contains:
 
 - `api` - exposed [@opentelemetry/api](https://www.npmjs.com/package/@opentelemetry/api) module
 - `tracer` - an instance of a `Tracer`
@@ -204,7 +204,7 @@ to create spans manually. Global `sumoLogicOpenTelemetryRum` objects contains:
 Example:
 
 ```javascript
-const { tracer, api, recordError } = sumoLogicOpenTelemetryRum;
+const { tracer, api, recordError } = vunetRum;
 const span = tracer.startSpan('fetchUserData', {
   attributes: { organization: 'client-a' },
 });
@@ -214,7 +214,7 @@ api.context.with(api.trace.setSpan(api.context.active(), span), () => {
 recordError('Cannot load data', { organization: 'test' });
 ```
 
-Using in production, make sure your website works when `sumoLogicOpenTelemetryRum` is not defined (e.g. blocked by a
+Using in production, make sure your website works when `vunetRum` is not defined (e.g. blocked by a
 browser extension).
 
 ## Disable instrumentation
@@ -223,32 +223,32 @@ Instrumentation can be disabled and enabled again in runtime using `registerInst
 and `disableInstrumentations()` methods.
 
 ```javascript
-sumoLogicOpenTelemetryRum.disableInstrumentations();
+vunetRum.disableInstrumentations();
 // some code with instrumentations disabled
-sumoLogicOpenTelemetryRum.registerInstrumentations();
+vunetRum.registerInstrumentations();
 ```
 
 ## Public API
 
-All method are available under the `window.sumoLogicOpenTelemetryRum` object.
+All method are available under the `window.vunetRum` object.
 
 ### setDefaultAttribute(key, value)
 
 Extends the list of default attributes specified during initialization.
 
-Example: `window.sumoLogicOpenTelemetryRum.setDefaultAttribute('user_id', userId)`
+Example: `window.vunetRum.setDefaultAttribute('user_id', userId)`
 
 ### getCurrentSessionId()
 
 Returns current value of the `rum.session_id` attribute. Returned value may change in time, so don't cache it.
 
-Example: `window.sumoLogicOpenTelemetryRum.getCurrentSessionId()`
+Example: `window.vunetRum.getCurrentSessionId()`
 
 ### recordError()
 
 Sends an error with the given message and optional attributes.
 
-Example: `window.sumoLogicOpenTelemetryRum.recordError('Cannot load data', { organization: 'test' })`
+Example: `window.vunetRum.recordError('Cannot load data', { organization: 'test' })`
 
 # License
 

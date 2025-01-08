@@ -16,7 +16,8 @@ export function decideAndRecord(sessionIdGetter: SessionIdGetter): void {
           }
         },
         recordCanvas: true,
-        // packFn: pack,
+
+        packFn: pack,
       });
     })
     .catch((error) => {

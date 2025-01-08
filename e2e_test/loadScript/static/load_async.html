@@ -13,9 +13,9 @@
       ((e = d.createElement('script')).async = 1),
       (e.src = r),
       (n = d.getElementsByTagName('script')[0]).parentNode.insertBefore(e, n);
-  })(window, 'sumoLogicOpenTelemetryRum', document, 'rum.js');
-  window.sumoLogicOpenTelemetryRum.onReady(function () {
-    window.sumoLogicOpenTelemetryRum.initialize({
+  })(window, 'vunetRum', document, 'rum.js');
+  window.vunetRum.onReady(function () {
+    window.vunetRum.initialize({
       collectionSourceUrl: 'http://localhost:{{port}}/rum',
       serviceName: 'load-async-test-service-name',
       applicationName: 'load-async-test-application-name',

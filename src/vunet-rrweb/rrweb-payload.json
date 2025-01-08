@@ -1,7 +1,8 @@
 {
-  "client": "",
-  "app": "",
+  "service": "",
+  "application": "",
   "sessionId": "",
+  "version": "",
   "time": 1735464297000,
   "events": [
     {

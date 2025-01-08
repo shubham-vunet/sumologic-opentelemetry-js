@@ -46,7 +46,7 @@ type ReadyListener = () => void;
 
 declare global {
   interface Window {
-    sumoLogicOpenTelemetryRum: {
+    vunetRum: {
       initialize: (options: InitializeOptions) => void;
       readyListeners: ReadyListener[];
       onReady: (callback: ReadyListener) => void;
@@ -89,7 +89,7 @@ const useWindow = typeof window === 'object' && window != null;
 let contextManager: SumoLogicContextManager | undefined;
 
 if (useWindow) {
-  window.sumoLogicOpenTelemetryRum = window.sumoLogicOpenTelemetryRum || {};
+  window.vunetRum = window.vunetRum || {};
 
   // create context manager right now to patch APIs for situations when 'initialize' is called later
   contextManager = new SumoLogicContextManager();
@@ -288,7 +288,7 @@ export const initialize = ({
   };
 
   if (useWindow) {
-    Object.assign(window.sumoLogicOpenTelemetryRum, result);
+    Object.assign(window.vunetRum, result);
   }
 
   decideAndRecord(getCurrentSessionId);
@@ -297,9 +297,9 @@ export const initialize = ({
 };
 
 if (useWindow) {
-  window.sumoLogicOpenTelemetryRum.initialize = initialize;
+  window.vunetRum.initialize = initialize;
 
-  const readyListeners = window.sumoLogicOpenTelemetryRum?.readyListeners;
+  const readyListeners = window.vunetRum?.readyListeners;
   if (Array.isArray(readyListeners)) {
     readyListeners.forEach((callback) => callback());
   }
