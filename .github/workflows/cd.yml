@@ -27,6 +27,7 @@ jobs:
       # the latest tag needs to be manually restored with
       # 'npm dist-tag add @vunet/otel-rum@{version} latest'
       - run: |
+          npm version patch $GITHUB_RUN_ID
           npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
           npm publish --access public
         env:
