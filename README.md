@@ -1,7 +1,6 @@
-# Sumo Logic OpenTelemetry RUM
+# Vunet OTEL RUM
 
-The [Sumo Logic](https://www.sumologic.com/) OpenTelemetry auto-instrumentation for JavaScript library enables tracing
-in the browser.
+The Vunet RUM OTEL auto-instrumentation JavaScript library is designed to enhance your browser experience by enabling both Session Replay and tracing. This powerful tool allows developers to capture and replay user sessions, providing valuable insights into user interactions and behaviors. Additionally, it facilitates comprehensive tracing within the browser, helping to identify and diagnose performance issues and errors more effectively.
 
 ## Features
 
@@ -15,7 +14,6 @@ in the browser.
 - uncaught exceptions, unhandled rejections, document errors and console errors
 - support for manual instrumentation
 - automatic context carrying through timers, promises, native async-await, events, observers and more
-- 103 KB (31 KB gzipped)
 
 ## Installation
 
@@ -24,13 +22,13 @@ your website:
 
 ```html
 <script
-  src="https://rum.sumologic.com/sumologic-rum.js"
+  src="https://cdn.vunet.io/otel-rum/latest/rum.js"
   type="text/javascript"
 ></script>
 <script>
   window.vunetRum &&
     window.vunetRum.initialize({
-      collectionSourceUrl: 'sumo_logic_traces_collector_source_url',
+      collectionSourceUrl: 'vunet_traces_collector_source_url',
       serviceName: 'name_of_your_web_service',
       propagateTraceHeaderCorsUrls: [
         'list_of_domains_to_receive_trace_context',
@@ -64,11 +62,11 @@ requests made before script run will be limited.
     window,
     'vunetRum',
     document,
-    'https://rum.sumologic.com/sumologic-rum.js',
+    'https://cdn.vunet.io/otel-rum/latest/rum.js',
   );
   window.vunetRum.onReady(function () {
     window.vunetRum.initialize({
-      collectionSourceUrl: 'sumo_logic_traces_collector_source_url',
+      collectionSourceUrl: 'vunet_traces_collector_source_url',
       serviceName: 'name_of_your_web_service',
       propagateTraceHeaderCorsUrls: [
         'list_of_domains_to_receive_trace_context',
@@ -78,20 +76,6 @@ requests made before script run will be limited.
   });
 </script>
 ```
-
-**Note**: XHR and navigation/route changes support as well as errors collection requires RUM script in version 4 or
-higher (https://rum.sumologic.com/sumologic-rum-v4.js). Please ensure you are using the correct version in your pages.
-For automatic updates use https://rum.sumologic.com/sumologic-rum.js.
-
-**Note**: Above examples omit the version of the script in the `src` attribute and automatically uses most up to date
-version of it. If you want to manually control versioning of the script please use:
-
-- https://rum.sumologic.com/sumologic-rum-vX.js (e.g. https://rum.sumologic.com/sumologic-rum-v4.js) for major version
-  control (no breaking changes),
-- https://rum.sumologic.com/sumologic-rum-vX.Y.js (e.g. https://rum.sumologic.com/sumologic-rum-v4.0.js) for major
-  version control (only bugfixes are automatically included),
-- https://rum.sumologic.com/sumologic-rum-vX.Y.Z.js (e.g. https://rum.sumologic.com/sumologic-rum-v4.0.0.js) for major
-  version control (strict version control).
 
 ## Manual installation
 
@@ -105,7 +89,7 @@ RUM needs to be initialized preferably before other functionalities in your code
 import { initialize } from '@vunet/otel-rum';
 
 initialize({
-  collectionSourceUrl: 'sumo_logic_traces_collector_source_url',
+  collectionSourceUrl: 'vunet_traces_collector_source_url',
   serviceName: 'name_of_your_web_service',
   propagateTraceHeaderCorsUrls: ['list_of_domains_to_receive_trace_context'],
 });
@@ -115,25 +99,25 @@ initialize({
 
 Both `script` tag and manual installation can be configured with following parameters:
 
-| Parameter                       | Type                                                                                                                                                                                     | Default     | Description                                                                                                  |
-| ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------ |
-| collectionSourceUrl             | `string`                                                                                                                                                                                 | _required_  | Sumo Logic collector source url                                                                              |
-| authorizationToken              | `string`                                                                                                                                                                                 |             | Sumo Logic collector authorization token                                                                     |
-| serviceName                     | `string`                                                                                                                                                                                 | `"unknown"` | Name of your web service                                                                                     |
-| applicationName                 | `string`                                                                                                                                                                                 |             | Name of your application                                                                                     |
-| deploymentEnvironment           | `string`                                                                                                                                                                                 |             | The software deployment (e.g. `staging`, `production`)                                                       |
-| defaultAttributes               | `object`                                                                                                                                                                                 | `{}`        | Attributes added to each span                                                                                |
-| samplingProbability             | `number`                                                                                                                                                                                 | `1`         | `1` means all traces are sent, `0` - no traces are send, `0.5` - there is 50% change for a trace to be sent  |
-| bufferMaxSpans                  | `number`                                                                                                                                                                                 | `2048`      | Maximum number of spans waiting to be send                                                                   |
-| maxExportBatchSize              | `number`                                                                                                                                                                                 | `50`        | Maximum number of spans in one request                                                                       |
-| bufferTimeout                   | `number`                                                                                                                                                                                 | `2000`ms    | Time in milliseconds for spans waiting to be send                                                            |
-| ignoreUrls                      | `(string\|RegExp)[]`                                                                                                                                                                     | `[]`        | List of XHR URLs to ignore (e.g. analytics)                                                                  |
-| propagateTraceHeaderCorsUrls    | `(string\|RegExp)[]`                                                                                                                                                                     | `[]`        | List of URLs where [W3C Trace Context](https://www.w3.org/TR/trace-context/) HTTP header will be injected    |
-| collectSessionId                | `boolean`                                                                                                                                                                                | `true`      | Enables collecting `rum.session_id` attribute                                                                |
-| dropSingleUserInteractionTraces | `boolean`                                                                                                                                                                                | `true`      | Automatically drops traces with only one span coming from the user-interaction instrumentation (click etc.)  |
-| collectErrors                   | `boolean`                                                                                                                                                                                | `true`      | Automatically collect and send uncaught exceptions, unhandled rejections, document errors and console errors |
-| userInteractionElementNameLimit | `number`                                                                                                                                                                                 | `20`        | Limit for user interaction element name, after which the name will be truncated with `...` suffix.           |
-| getOverriddenServiceName        | <code>(span: [Span](https://github.com/SumoLogic/opentelemetry-js/blob/0bc25fa930d358bda42026bd66bed23b7a4dc9bb/packages/opentelemetry-sdk-trace-base/src/Span.ts#L39)) => string</code> |             | Function used for overridding the service name of a span during its creation.                                |
+| Parameter                       | Type                                                                                                                                          | Default     | Description                                                                                                  |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------ |
+| collectionSourceUrl             | `string`                                                                                                                                      | _required_  | Sumo Logic collector source url                                                                              |
+| authorizationToken              | `string`                                                                                                                                      |             | Sumo Logic collector authorization token                                                                     |
+| serviceName                     | `string`                                                                                                                                      | `"unknown"` | Name of your web service                                                                                     |
+| applicationName                 | `string`                                                                                                                                      |             | Name of your application                                                                                     |
+| deploymentEnvironment           | `string`                                                                                                                                      |             | The software deployment (e.g. `staging`, `production`)                                                       |
+| defaultAttributes               | `object`                                                                                                                                      | `{}`        | Attributes added to each span                                                                                |
+| samplingProbability             | `number`                                                                                                                                      | `1`         | `1` means all traces are sent, `0` - no traces are send, `0.5` - there is 50% change for a trace to be sent  |
+| bufferMaxSpans                  | `number`                                                                                                                                      | `2048`      | Maximum number of spans waiting to be send                                                                   |
+| maxExportBatchSize              | `number`                                                                                                                                      | `50`        | Maximum number of spans in one request                                                                       |
+| bufferTimeout                   | `number`                                                                                                                                      | `2000`ms    | Time in milliseconds for spans waiting to be send                                                            |
+| ignoreUrls                      | `(string\|RegExp)[]`                                                                                                                          | `[]`        | List of XHR URLs to ignore (e.g. analytics)                                                                  |
+| propagateTraceHeaderCorsUrls    | `(string\|RegExp)[]`                                                                                                                          | `[]`        | List of URLs where [W3C Trace Context](https://www.w3.org/TR/trace-context/) HTTP header will be injected    |
+| collectSessionId                | `boolean`                                                                                                                                     | `true`      | Enables collecting `rum.session_id` attribute                                                                |
+| dropSingleUserInteractionTraces | `boolean`                                                                                                                                     | `true`      | Automatically drops traces with only one span coming from the user-interaction instrumentation (click etc.)  |
+| collectErrors                   | `boolean`                                                                                                                                     | `true`      | Automatically collect and send uncaught exceptions, unhandled rejections, document errors and console errors |
+| userInteractionElementNameLimit | `number`                                                                                                                                      | `20`        | Limit for user interaction element name, after which the name will be truncated with `...` suffix.           |
+| getOverriddenServiceName        | <code>(span: [Span](https://github.com/vunetsystems/otel-rum/blob/0ac1244794f85ef38458c5a5c32c7aca80bbaf25/src/Span.ts#L39)) => string</code> |             | Function used for overridding the service name of a span during its creation.                                |
 
 ## Trace context propagation
 
@@ -149,9 +133,9 @@ in production.
 For example:
 
 ```javascript
-// propagates trace context in requests made to https://api.sumologic.com or http://localhost:3000/api URLs
+// propagates trace context in requests made to https://api.vunet.io or http://localhost:3000/api URLs
 propagateTraceHeaderCorsUrls: [
-  /^https:\/\/api\.sumologic.com\/.*/,
+  /^https:\/\/api\.vunet.io\/.*/,
   /^http:\/\/localhost:3000\/api\/.*/,
 ],
 ```
