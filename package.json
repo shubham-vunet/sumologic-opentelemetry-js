@@ -1,7 +1,7 @@
 {
   "name": "@vunet/otel-rum",
   "version": "4.6.1",
-  "description": "Adds OpenTelemetry tracing auto-instrumentation in the browser. Collects spans on network events and sends them to Sumo Logic.",
+  "description": "Adds OpenTelemetry tracing auto-instrumentation in the browser. Collects spans on network events and sends them to Vunet Systems.",
   "main": "./dist/index.js",
   "types": "./dist/src/index.d.ts",
   "files": [
@@ -20,13 +20,12 @@
     "test:e2e": "npx playwright test --retries=3 e2e_test",
     "prepare": "husky install"
   },
-  "repository": "SumoLogic/sumologic-opentelemetry-js",
-  "author": "Sumo Logic Authors",
+  "author": "Vunet Systems",
   "license": "Apache-2.0",
   "keywords": [
     "opentelemetry",
     "tracing",
-    "sumologic",
+    "vunet",
     "sumo",
     "rum",
     "ot"
