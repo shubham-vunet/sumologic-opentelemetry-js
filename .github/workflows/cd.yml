@@ -21,6 +21,7 @@ jobs:
           node-version: 14.x
           registry-url: https://registry.npmjs.org/
       - run: npm ci
+      - run: npx playwright install-deps
       # TODO: don't change 'latest' dist-tag for beta versions;
       # currently when publishing version with a suffix,
       # the latest tag needs to be manually restored with
