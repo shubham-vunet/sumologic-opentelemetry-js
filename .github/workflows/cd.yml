@@ -26,8 +26,8 @@ jobs:
       # currently when publishing version with a suffix,
       # the latest tag needs to be manually restored with
       # 'npm dist-tag add @vunet/otel-rum@{version} latest'
+      # npm version patch $GITHUB_RUN_ID
       - run: |
-          npm version patch $GITHUB_RUN_ID
           npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
           npm publish --access public
         env:
