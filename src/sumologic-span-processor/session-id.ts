@@ -8,7 +8,7 @@ interface Cookie {
   lastActivityTimestamp: number;
 }
 
-const SESSION_ID_ATTRIBUTE = 'rum.session_id';
+export const SESSION_ID_ATTRIBUTE = 'rum.session_id';
 const COOKIE_NAME = 'vunetRumSessionId';
 const COOKIE_VALUE_SEPARATOR = '-';
 const MAX_INACTIVITY_MS = 1000 * 60 * 5; // 5 minutes

@@ -10,7 +10,7 @@ export default {
   input: 'src/index.ts',
   output: [
     {
-      file: './dist/browser.js',
+      file: './dist/rum3.vunet.js',
       format: 'iife',
       sourcemap: true,
     },

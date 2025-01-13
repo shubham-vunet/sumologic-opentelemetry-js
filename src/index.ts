@@ -37,10 +37,13 @@ import {
   tryNumber,
 } from './utils';
 import { version } from '../package.json';
-import { getCurrentSessionId } from './sumologic-span-processor/session-id';
+import {
+  getCurrentSessionId,
+  SESSION_ID_ATTRIBUTE,
+} from './sumologic-span-processor/session-id';
 import { Attributes } from '@opentelemetry/api';
 import { CompositePropagator, W3CBaggagePropagator } from '@opentelemetry/core';
-import { decideAndRecord } from './vunet-rrweb';
+import { decideAndRecord, SessionReplayExporter } from './vunet-rrweb';
 
 type ReadyListener = () => void;
 
@@ -129,7 +132,7 @@ export const initialize = ({
 
   const resourceAttributes: ResourceAttributes = {
     [SemanticResourceAttributes.SERVICE_NAME]: defaultServiceName,
-    ['sumologic.rum.version']: version,
+    ['vunet.rum.version']: version,
   };
 
   if (applicationName) {
@@ -165,7 +168,12 @@ export const initialize = ({
     propagator: compositePropagator,
   });
 
-  const runtimeDefaultAttributes: Attributes = { ...defaultAttributes };
+  const sessionIdAttribute = { [SESSION_ID_ATTRIBUTE]: getCurrentSessionId() };
+
+  const runtimeDefaultAttributes: Attributes = {
+    ...defaultAttributes,
+    ...sessionIdAttribute,
+  };
 
   const setDefaultAttribute = (
     key: string,
@@ -291,7 +299,17 @@ export const initialize = ({
     Object.assign(window.vunetRum, result);
   }
 
-  decideAndRecord(getCurrentSessionId);
+  const sessionReplayExporter = new SessionReplayExporter({
+    collectionSourceUrl,
+    getCurrentSessionId,
+    applicationName,
+    defaultAttributes,
+    deploymentEnvironment,
+    maxExportBatchSize,
+    serviceName,
+  });
+
+  sessionReplayExporter.decideAndRecord();
 
   return result;
 };

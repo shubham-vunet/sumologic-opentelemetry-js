@@ -1,6 +1,22 @@
 import { eventWithTime } from '@rrweb/types';
+import * as api from '@opentelemetry/api';
 import { RRWEB_ENDPOINT } from './common';
 import { BatchingOptions, BatchPayload, SessionIdGetter } from './types';
+import { decideAndRecord } from './decideAndRecordEvents';
+
+export interface SessionReplayExporterOptions {
+  collectionSourceUrl: string;
+  authorizationToken?: string;
+  serviceName?: string;
+  applicationName?: string;
+  deploymentEnvironment?: string;
+  defaultAttributes?: api.Attributes;
+  samplingProbability?: number | string;
+  bufferMaxSpans?: number;
+  maxExportBatchSize?: number;
+  bufferTimeout?: number;
+  getCurrentSessionId: SessionIdGetter;
+}
 
 const eventQueue: eventWithTime[] = [];
 const BATCH_SIZE = 500;
@@ -29,6 +45,7 @@ export const processEvent = (
   }
 
   const eventsToSend = eventQueue.splice(0, BATCH_SIZE);
+
   const sessionId = sidGetter();
   const payload: BatchPayload = {
     sessionId,
@@ -38,14 +55,45 @@ export const processEvent = (
 };
 
 const sendPayload = (payload: BatchPayload) => {
-  console.log(payload);
-  console.log(JSON.stringify(payload));
+  const otelPayload = {
+    resourceLogs: [
+      {
+        resource: {
+          attributes: [
+            {
+              key: 'service.name',
+              value: { stringValue: 'vunet-rrweb' },
+            },
+          ],
+        },
+        scopeLogs: [
+          {
+            scope: {
+              name: 'vunet-rrweb',
+              version: '1.0.0',
+            },
+            logRecords: payload.events.map((event) => ({
+              timeUnixNano: event.timestamp * 1e6,
+              body: { stringValue: JSON.stringify(event) },
+              attributes: [
+                {
+                  key: 'session.id',
+                  value: { stringValue: payload.sessionId },
+                },
+              ],
+            })),
+          },
+        ],
+      },
+    ],
+  };
+
   fetch(RRWEB_ENDPOINT, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(payload),
+    body: JSON.stringify(otelPayload),
   })
     .then((response) => {
       if (!response.ok) {
@@ -71,3 +119,11 @@ const debounceSendEvents = (sidGetter: SessionIdGetter) => {
     processEvent(sidGetter, undefined, { forceSend: true });
   }, DEBOUNCE_TIME_MS);
 };
+
+export class SessionReplayExporter {
+  options: SessionReplayExporterOptions;
+  constructor(options: SessionReplayExporterOptions) {
+    this.options = options;
+  }
+  decideAndRecord = () => decideAndRecord(this.options);
+}
