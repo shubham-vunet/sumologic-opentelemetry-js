@@ -26,9 +26,8 @@
     "opentelemetry",
     "tracing",
     "vunet",
-    "sumo",
     "rum",
-    "ot"
+    "session replay"
   ],
   "devDependencies": {
     "@playwright/test": "^1.15.0",
