@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { RRWEB_ENDPOINT } from './common';
+import { DECIDE_API_ENDPOINT } from './common';
 import { DecideApiRequest, ApiResponseData } from './types';
 
 /**
@@ -22,7 +22,7 @@ export async function getRrwebDataPercentage(
     // );
 
     const response = await axios.get<ApiResponseData>(
-      `${RRWEB_ENDPOINT}-${pickOne(['partial', 'full', 'none'])}.json`,
+      `${DECIDE_API_ENDPOINT}-${pickOne(['partial', 'full', 'none'])}.json`,
       { params: requestData },
     );
     return response.data;

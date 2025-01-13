@@ -1,6 +1,6 @@
 import { eventWithTime } from '@rrweb/types';
 import * as api from '@opentelemetry/api';
-import { RRWEB_ENDPOINT } from './common';
+import { TRACES_ENDPOINT } from './common';
 import { BatchingOptions, BatchPayload, SessionIdGetter } from './types';
 import { decideAndRecord } from './decideAndRecordEvents';
 
@@ -55,6 +55,7 @@ export const processEvent = (
 };
 
 const sendPayload = (payload: BatchPayload) => {
+  console.log(payload);
   const otelPayload = {
     resourceLogs: [
       {
@@ -88,7 +89,7 @@ const sendPayload = (payload: BatchPayload) => {
     ],
   };
 
-  fetch(RRWEB_ENDPOINT, {
+  fetch(TRACES_ENDPOINT, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

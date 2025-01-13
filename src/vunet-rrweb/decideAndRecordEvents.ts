@@ -1,4 +1,4 @@
-import { pack, record } from 'rrweb';
+import { record } from 'rrweb';
 import { getRequestData, getRrwebDataPercentage } from './decideApi';
 import { processEvent, SessionReplayExporterOptions } from './rrweb';
 import { eventWithTime } from '@rrweb/types';
@@ -16,7 +16,7 @@ export function decideAndRecord(options: SessionReplayExporterOptions): void {
         },
         recordCanvas: true,
 
-        packFn: pack,
+        // packFn: pack,
       });
     })
     .catch((error) => {
