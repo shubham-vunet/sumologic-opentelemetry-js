@@ -11,22 +11,22 @@ const { version } = require('../package.json');
 
 const getFileNames = () => {
   const res = (paths) => ({
-    script: paths,
-    sourcemap: paths.map((path) => `${path}.map`),
+    script: paths.map((path) => `rum/${path}.js`),
+    sourcemap: paths.map((path) => `rum/${path}.js.map`),
   });
 
   const uriVersion = encodeURIComponent(version);
   const [major, minor, patch] = uriVersion.split('.');
 
   if (!Number.isInteger(Number(patch))) {
-    return res([`vunet-rum-v${uriVersion}.js`]);
+    return res([`vunet-rum-v${uriVersion}`]);
   }
 
   return res([
-    `vunet-rum-v${uriVersion}.js`,
-    `vunet-rum-v${major}.${minor}.js`,
-    `vunet-rum-v${major}.js`,
-    `vunet-rum.js`,
+    `vunet-rum-v${uriVersion}`,
+    `vunet-rum-v${major}.${minor}`,
+    `vunet-rum-v${major}`,
+    `vunet-rum`,
   ]);
 };
 

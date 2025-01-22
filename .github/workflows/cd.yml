@@ -27,7 +27,12 @@ jobs:
       # the latest tag needs to be manually restored with
       # 'npm dist-tag add @vunet/otel-rum@{version} latest'
       # npm version patch $GITHUB_RUN_ID
-      - run: npm run build
+      - run: |
+          npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
+          npm publish --access public
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
       - run: npm i aws-sdk@^2.977.0
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -39,13 +44,6 @@ jobs:
           role-session-name: OIDCSession
       - run: node scripts/publish-to-cdn.js
         env:
-          #     RUM_CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.RUM_CLOUDFRONT_DISTRIBUTION_ID }}
+          # RUM_CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.RUM_CLOUDFRONT_DISTRIBUTION_ID }}
           RUM_S3_BUCKET: ${{ secrets.RUM_S3_BUCKET }}
-      #     SLACK_WEBHOOK_TRACING_RELEASES: ${{ secrets.SLACK_WEBHOOK_TRACING_RELEASES }}
-
-      - run: |
-          npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
-          npm publish --access public
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GITHUB_RUN_ID: ${{ github.run_id }}
+          # SLACK_WEBHOOK_TRACING_RELEASES: ${{ secrets.SLACK_WEBHOOK_TRACING_RELEASES }}
