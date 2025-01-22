@@ -91,8 +91,8 @@ const uploadFileToCDN = (filename, file) => {
 const main = async () => {
   const filenames = getFileNames();
 
-  const scriptFile = await fs.readFile('./dist/vunet.rum.js');
-  // const sourcemapFile = await fs.readFile('./dist/vunet.rum.js.map');
+  const scriptFile = await fs.readFile('./dist/rum3.vunet.js');
+  // const sourcemapFile = await fs.readFile('./dist/rum3.vunet.js.map');
 
   for (const filename of filenames.script) {
     await uploadFileToCDN(filename, scriptFile);
