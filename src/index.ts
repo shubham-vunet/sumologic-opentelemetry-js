@@ -70,6 +70,7 @@ declare global {
 interface InitializeOptions {
   collectionSourceUrl: string;
   authorizationToken?: string;
+  decideApiEndpoint?: string;
   serviceName?: string;
   applicationName?: string;
   deploymentEnvironment?: string;
@@ -117,6 +118,7 @@ export const initialize = ({
   collectErrors = true,
   userInteractionElementNameLimit = DEFAULT_USER_INTERACTION_ELEMENT_NAME_LIMIT,
   getOverriddenServiceName,
+  decideApiEndpoint,
 }: InitializeOptions) => {
   if (!useWindow) return;
 
@@ -307,6 +309,8 @@ export const initialize = ({
     deploymentEnvironment,
     maxExportBatchSize,
     serviceName,
+    rrwebCollectionSourceUrl: collectionSourceUrl,
+    decideApiEndpoint: decideApiEndpoint || '/decide',
   });
 
   sessionReplayExporter.decideAndRecord();

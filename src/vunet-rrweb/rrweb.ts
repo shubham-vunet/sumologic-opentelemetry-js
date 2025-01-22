@@ -16,6 +16,8 @@ export interface SessionReplayExporterOptions {
   maxExportBatchSize?: number;
   bufferTimeout?: number;
   getCurrentSessionId: SessionIdGetter;
+  decideApiEndpoint: string;
+  rrwebCollectionSourceUrl: string;
 }
 
 const eventQueue: eventWithTime[] = [];

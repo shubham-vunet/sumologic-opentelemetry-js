@@ -1,30 +1,17 @@
 import axios from 'axios';
-import { DECIDE_API_ENDPOINT } from './common';
 import { DecideApiRequest, ApiResponseData } from './types';
-
-/**
- * Pick one element from the array
- */
-function pickOne<T extends object | string>(arr: T[]) {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
 
 /**
  * Get RRWEB data percentage
  */
 export async function getRrwebDataPercentage(
+  decideApiEndpoint: string,
   requestData: DecideApiRequest,
 ): Promise<ApiResponseData> {
   try {
-    // const response = await axios.post<ApiResponseData>(
-    //   `${RRWEB_ENDPOINT}-${pickOne(['partial', 'full', 'none'])}.json`,
-    //   requestData,
-    // );
-
-    const response = await axios.get<ApiResponseData>(
-      `${DECIDE_API_ENDPOINT}-${pickOne(['partial', 'full', 'none'])}.json`,
-      { params: requestData },
-    );
+    const response = await axios.get<ApiResponseData>(decideApiEndpoint, {
+      params: requestData,
+    });
     return response.data;
   } catch (error) {
     console.error('Error fetching RRWEB data percentage:', error);

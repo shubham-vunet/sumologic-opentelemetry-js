@@ -5,7 +5,8 @@ import { eventWithTime } from '@rrweb/types';
 
 export function decideAndRecord(options: SessionReplayExporterOptions): void {
   const sessionId = options.getCurrentSessionId();
-  getRrwebDataPercentage(getRequestData(sessionId))
+  const requestData = getRequestData(sessionId);
+  getRrwebDataPercentage(options.decideApiEndpoint, requestData)
     .then((responseData) => {
       console.log('RRWEB data percentage is', responseData.percentage);
       record({
@@ -15,8 +16,6 @@ export function decideAndRecord(options: SessionReplayExporterOptions): void {
           }
         },
         recordCanvas: true,
-
-        // packFn: pack,
       });
     })
     .catch((error) => {
