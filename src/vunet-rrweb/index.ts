@@ -1,2 +1,1 @@
-export { processEvent, SessionReplayExporter } from './rrweb';
-export { decideAndRecord } from './decideAndRecordEvents';
+export { SessionReplayExporter } from './rrweb';

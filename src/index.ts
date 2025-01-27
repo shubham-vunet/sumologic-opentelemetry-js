@@ -43,7 +43,7 @@ import {
 } from './sumologic-span-processor/session-id';
 import { Attributes } from '@opentelemetry/api';
 import { CompositePropagator, W3CBaggagePropagator } from '@opentelemetry/core';
-import { decideAndRecord, SessionReplayExporter } from './vunet-rrweb';
+import { SessionReplayExporter } from './vunet-rrweb';
 
 type ReadyListener = () => void;
 
@@ -311,6 +311,7 @@ export const initialize = ({
     serviceName,
     rrwebCollectionSourceUrl: collectionSourceUrl,
     decideApiEndpoint: decideApiEndpoint || '/decide',
+    flushTimeout: 3000,
   });
 
   sessionReplayExporter.decideAndRecord();
