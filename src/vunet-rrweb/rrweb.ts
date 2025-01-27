@@ -1,12 +1,7 @@
 import { eventWithTime } from '@rrweb/types';
 import * as api from '@opentelemetry/api';
 import { TRACES_ENDPOINT } from './common';
-import {
-  ApiResponseData,
-  BatchingOptions,
-  BatchPayload,
-  SessionIdGetter,
-} from './types';
+import { ApiResponseData, BatchingOptions, SessionIdGetter } from './types';
 import { getRequestData, getRrwebDataPercentage } from './decideApi';
 import { record } from 'rrweb';
 
@@ -22,7 +17,7 @@ export interface SessionReplayExporterOptions {
   maxExportBatchSize?: number;
   bufferTimeout?: number;
   getCurrentSessionId: SessionIdGetter;
-  decideApiEndpoint: string;
+  decideApiEndpoint?: string;
   rrwebCollectionSourceUrl: string;
   flushTimeout?: number;
 }

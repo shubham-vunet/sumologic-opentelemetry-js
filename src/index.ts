@@ -310,7 +310,7 @@ export const initialize = ({
     maxExportBatchSize,
     serviceName,
     rrwebCollectionSourceUrl: collectionSourceUrl,
-    decideApiEndpoint: decideApiEndpoint || '/decide',
+    decideApiEndpoint,
     flushTimeout: 3000,
   });
 

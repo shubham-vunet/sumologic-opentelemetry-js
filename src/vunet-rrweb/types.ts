@@ -1,9 +1,4 @@
-import { EventType, eventWithTime } from '@rrweb/types';
-
-export type BatchPayload = {
-  sessionId: string;
-  events: eventWithTime[];
-};
+import { EventType } from '@rrweb/types';
 
 export type BatchingOptions = {
   // Sends the events immediately without batching
@@ -34,25 +29,3 @@ export interface ApiResponseData {
    */
   eventFilter: EventType[];
 }
-
-type Config = {
-  enable_collect_everything: boolean;
-};
-
-type SessionRecording = {
-  endpoint: string;
-  consoleLogRecordingEnabled: boolean;
-};
-
-type ViZData = {
-  toolbarParams: Record<string, unknown>; //??
-  errorsWhileComputingFlags: boolean; //??
-  capturePerformance: boolean; // Which Performance
-  isAuthenticated: boolean; // I guess not required
-  supportedCompression: string[]; // Base64 is not a compression Its an Encoding
-  config: Config; // What other config
-  featureFlagPayloads: Record<string, unknown>; // What is this
-  featureFlags: Record<string, unknown>; // What is this
-  sessionRecording: SessionRecording; // ??
-  siteApps: unknown[]; // What is this
-};
