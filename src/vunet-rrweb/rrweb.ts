@@ -9,7 +9,7 @@ export interface SessionReplayExporterOptions {
   collectionSourceUrl: string;
   authorizationToken?: string;
   serviceName?: string;
-  applicationName?: string;
+  applicationName: string;
   deploymentEnvironment?: string;
   defaultAttributes?: api.Attributes;
   samplingProbability?: number | string;
@@ -17,7 +17,7 @@ export interface SessionReplayExporterOptions {
   maxExportBatchSize?: number;
   bufferTimeout?: number;
   getCurrentSessionId: SessionIdGetter;
-  decideApiEndpoint?: string;
+  decideApiEndpoint: string;
   rrwebCollectionSourceUrl: string;
   flushTimeout?: number;
 }
@@ -65,33 +65,44 @@ export class SessionReplayExporter<Q extends eventWithTime = eventWithTime> {
     this.sendPayload();
   }
 
-  decideAndRecord(): void {
-    const decideApiEndpoint = this.options.decideApiEndpoint;
+  async decideAndRecord(): Promise<ApiResponseData | null> {
+    const urlObj = new URL(this.options.decideApiEndpoint);
+    urlObj.searchParams.set('app_id', this.options.applicationName);
+
+    const decideApiEndpoint = urlObj.toString();
+
     if (!decideApiEndpoint) {
       console.error(
         'Not recording Data because decideApiEndpoint is not provided',
       );
-      return;
+      return null;
     }
 
     const sessionId = this.options.getCurrentSessionId();
-
     const requestData = getRequestData(sessionId);
-    getRrwebDataPercentage(decideApiEndpoint, requestData)
-      .then((responseData) => {
-        console.log('RRWEB data percentage is', responseData.percentage);
-        this.processResponse(responseData);
-      })
-      .catch((error) => {
-        console.error('Failed to get RRWEB data percentage:', error);
-      });
+
+    try {
+      const responseData = await getRrwebDataPercentage(
+        decideApiEndpoint,
+        requestData,
+      );
+      console.log(
+        'RRWEB data percentage is',
+        responseData.session_replay_percentage,
+      );
+      this.processResponse(responseData);
+      return responseData;
+    } catch (error) {
+      console.error('Failed to get RRWEB data percentage:', error);
+      return null;
+    }
   }
 
   private processResponse(responseData: ApiResponseData) {
     const process = this.processEvent.bind(this);
     record({
       emit(event: Q) {
-        if (shouldFilterEvent(event, responseData.percentage)) {
+        if (shouldFilterEvent(event, responseData.session_replay_percentage)) {
           process(event);
         }
       },

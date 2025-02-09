@@ -22,7 +22,8 @@ export interface SessionIdGetter {
 }
 
 export interface ApiResponseData {
-  percentage: number;
+  sampling_percentage: number;
+  session_replay_percentage: number;
   /**
    * Filter events based on the type of event
    * If array is empty or null then don't filter any event

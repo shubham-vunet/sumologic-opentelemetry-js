@@ -107,7 +107,7 @@ export const initialize = ({
   applicationName,
   deploymentEnvironment,
   defaultAttributes,
-  samplingProbability = 1,
+  samplingProbability,
   bufferMaxSpans = BUFFER_MAX_SPANS,
   maxExportBatchSize = MAX_EXPORT_BATCH_SIZE,
   bufferTimeout = BUFFER_TIMEOUT,
@@ -120,6 +120,9 @@ export const initialize = ({
   getOverriddenServiceName,
   decideApiEndpoint,
 }: InitializeOptions) => {
+  let isResolved = false;
+  let samplingProbabilityApi;
+
   if (!useWindow) return;
 
   if (!collectionSourceUrl) {
@@ -128,7 +131,38 @@ export const initialize = ({
     );
   }
 
-  const samplingProbabilityMaybeNumber = tryNumber(samplingProbability) ?? 1;
+  const sessionReplayExporter = new SessionReplayExporter({
+    collectionSourceUrl,
+    getCurrentSessionId,
+    applicationName: applicationName ?? 'vunet-default',
+    defaultAttributes,
+    serviceName,
+    rrwebCollectionSourceUrl: collectionSourceUrl,
+    decideApiEndpoint: decideApiEndpoint ?? '/vuSmartMaps/api/rum/',
+    flushTimeout: 3000,
+  });
+
+  sessionReplayExporter
+    .decideAndRecord()
+    .then((data) => {
+      isResolved = true;
+      samplingProbabilityApi = data?.sampling_percentage
+        ? data.sampling_percentage / 100
+        : null;
+    })
+    .catch((error) => {
+      isResolved = true;
+      samplingProbabilityApi = samplingProbability;
+      console.error('Error:', error);
+    });
+
+  // Busy-wait loop (not recommended for production)
+  while (!isResolved) {
+    // Blocking the main thread
+  }
+
+  const samplingProbabilityMaybeNumber =
+    tryNumber(samplingProbability) ?? tryNumber(samplingProbabilityApi) ?? 1;
 
   const defaultServiceName = serviceName ?? UNKNOWN_SERVICE_NAME;
 
@@ -301,21 +335,6 @@ export const initialize = ({
     Object.assign(window.vunetRum, result);
   }
 
-  const sessionReplayExporter = new SessionReplayExporter({
-    collectionSourceUrl,
-    getCurrentSessionId,
-    applicationName,
-    defaultAttributes,
-    deploymentEnvironment,
-    maxExportBatchSize,
-    serviceName,
-    rrwebCollectionSourceUrl: collectionSourceUrl,
-    decideApiEndpoint,
-    flushTimeout: 3000,
-  });
-
-  sessionReplayExporter.decideAndRecord();
-
   return result;
 };
 
@@ -367,7 +386,6 @@ if (
     ignoreUrls,
     propagateTraceHeaderCorsUrls,
   } = document.currentScript.dataset;
-
   (window as any).opentelemetry = initialize({
     collectionSourceUrl,
     authorizationToken,
