@@ -156,9 +156,9 @@ export const initialize = ({
       console.error('Error:', error);
     });
 
-  // Busy-wait loop (not recommended for production)
-  while (!isResolved) {
-    // Blocking the main thread
+  // Busy-wait loop (not recommended)
+  while (!isResolved && decideApiEndpoint !== undefined) {
+    // Blocking the main thread, asynchronous code will not run
   }
 
   const samplingProbabilityMaybeNumber =
