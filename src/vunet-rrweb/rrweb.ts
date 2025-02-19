@@ -1,6 +1,5 @@
 import { eventWithTime } from '@rrweb/types';
 import * as api from '@opentelemetry/api';
-import { TRACES_ENDPOINT } from './common';
 import { ApiResponseData, BatchingOptions, SessionIdGetter } from './types';
 import { getRequestData, getRrwebDataPercentage } from './decideApi';
 import { record } from 'rrweb';
@@ -144,7 +143,7 @@ export class SessionReplayExporter<Q extends eventWithTime = eventWithTime> {
       ],
     };
 
-    fetch(TRACES_ENDPOINT, {
+    fetch(this.options.rrwebCollectionSourceUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

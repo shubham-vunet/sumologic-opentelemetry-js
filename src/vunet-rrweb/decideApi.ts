@@ -33,7 +33,7 @@ export const getRequestData = (sessionId: string): DecideApiRequest => {
 
   return {
     connectionInfo,
-    userAgent: navigator.userAgent,
+    // userAgent: navigator.userAgent,
     resolution: `${window.screen.width}x${window.screen.height}`,
     sessionId,
   };

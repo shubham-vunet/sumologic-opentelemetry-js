@@ -12,7 +12,9 @@ export interface DecideApiRequest {
     rtt: number;
     saveData: boolean;
   } | null;
-  userAgent: string;
+
+  /** Can be fetched using headers, No Need to Send */
+  userAgent?: string;
   resolution: string;
   sessionId: string;
 }
