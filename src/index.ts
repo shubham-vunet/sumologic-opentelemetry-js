@@ -157,9 +157,11 @@ export const initialize = ({
     });
 
   // Busy-wait loop (not recommended)
+  console.log('Waiting for decide API response...');
   while (!isResolved && decideApiEndpoint !== undefined) {
     // Blocking the main thread, asynchronous code will not run
   }
+  console.log('Wait finished');
 
   const samplingProbabilityMaybeNumber =
     tryNumber(samplingProbability) ?? tryNumber(samplingProbabilityApi) ?? 1;
@@ -265,6 +267,10 @@ export const initialize = ({
   let disableOpenTelemetryInstrumentations: (() => void) | undefined;
 
   const disableInstrumentations = () => {
+    console.log(
+      'Disabling instrumentations',
+      !!disableOpenTelemetryInstrumentations,
+    );
     if (disableOpenTelemetryInstrumentations) {
       disableOpenTelemetryInstrumentations();
       logsInstrumentation?.disable();
@@ -277,6 +283,24 @@ export const initialize = ({
     disableInstrumentations();
     logsExporter.enable();
     logsInstrumentation?.enable();
+
+    registerOpenTelemetryInstrumentations({
+      tracerProvider: provider,
+      instrumentations: [
+        new DocumentLoadInstrumentation({ enabled: true }),
+        new XMLHttpRequestInstrumentation({
+          enabled: false,
+          propagateTraceHeaderCorsUrls,
+          ignoreUrls: [collectionSourceUrl, ...ignoreUrls],
+        }),
+        new FetchInstrumentation({
+          enabled: false,
+          propagateTraceHeaderCorsUrls,
+          ignoreUrls,
+        }),
+      ],
+    });
+
     disableOpenTelemetryInstrumentations =
       registerOpenTelemetryInstrumentations({
         tracerProvider: provider,
