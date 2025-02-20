@@ -22,7 +22,7 @@ export interface SessionReplayExporterOptions {
 }
 
 const BATCH_SIZE = 500;
-const MIN_BATCH_SIZE = 10;
+const MIN_BATCH_SIZE = 100;
 
 export class SessionReplayExporter<Q extends eventWithTime = eventWithTime> {
   debounceTimeout?: ReturnType<typeof setTimeout>;
@@ -168,7 +168,5 @@ export class SessionReplayExporter<Q extends eventWithTime = eventWithTime> {
 }
 
 function shouldFilterEvent(event: eventWithTime, percentage: number): boolean {
-  const threshold = 100 - percentage;
-  const random = Math.floor(Math.random() * 100);
-  return random > threshold;
+  return percentage > 0;
 }
